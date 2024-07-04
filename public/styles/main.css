@@ -1,0 +1,464 @@
+:root {
+    --card-height: 75vh;
+    --card-width: calc(var(--card-height) / 0.5);
+  }
+  
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: url("../images/maxresdefault.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+  }
+
+  #time {
+
+    position: fixed;
+    top: 0px;
+    color: aliceblue;
+    text-align: center;
+    font-family: Georgia, serif;
+  }
+
+  #card {
+    margin-top: 50px;
+    width: var(--card-width);
+    height: var(--card-height);
+    padding: 3px;
+    position: relative;
+    border-radius: 6px;
+    justify-content: center;
+    display: block;
+    font-size: 1.5em;
+    color: white;
+    font-family: Georgia, serif;
+   
+  }
+
+  #card .h1 {
+    
+    text-align: center;
+  }
+
+  #home {
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+    border: 1px solid;
+    border-color: aqua;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 25%;
+    height: 300px;
+    border-radius: 2cap;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: box-shadow 0.5s ease;
+    background-color:  #16738d;
+
+}
+
+input[type="text"]::placeholder {
+  color: #1b1e27; /* Ganti warna placeholder di sini */
+  font-family: Georgia, serif;
+}
+
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #16738d;
+  color: #1b1e27;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: Georgia, serif;
+}
+
+#buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ /* Adjust this height as needed */ 
+ 
+}
+
+
+#buttons {
+  margin-top: 20px;
+}
+
+#home,button:hover{
+  border: 1px solid white;
+  box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+  backdrop-filter: blur( 7px );
+  -webkit-backdrop-filter: blur( 7px );
+  }
+
+
+input {
+  margin-bottom: 50px;
+}
+
+input:hover{
+  border: 1px solid white;
+  box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+  backdrop-filter: blur( 7px );
+  -webkit-backdrop-filter: blur( 7px );
+  }
+
+
+#card-info {
+    display: inline-flex;
+    width: 100%;
+    height: 50%;
+
+    margin-top: 1px;
+   
+  }
+
+  #info-now {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  #now {
+    
+    margin-left: 50% ;
+    height: 100%;
+    text-align: center;
+  }
+  
+  #now p {
+    margin-bottom: 20px;
+  }
+  
+
+  #now img {
+
+    width: 100px;
+  }
+
+  #info-humidity {
+    display: inline-block;
+    width: 150px;
+    margin: 0px 100px 0px 100px;
+  }
+
+
+
+  
+
+  #feel-like {
+    display: inline-flex;
+    font-size: 21px;
+    border: 1px solid;
+    border-radius: 15px ;
+    width: 150px;
+    margin: 20px;
+    height: 100px;
+  }
+  #feel-like img {
+    width: 20px;
+    margin: 10px;
+    height: 30px;   
+  }
+
+  #feel-like h1 {
+    
+    text-align: center;
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 50px;
+  }
+
+  #feel-like h6 {
+    margin-left: 10px;
+  }
+
+  #feel-like:hover{
+    border: 2px solid white;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    width: 160px;
+    height: 110px;
+    }
+
+  #humidity  {
+    display: inline-flex;
+    font-size: 21px;
+    border: 1px solid;
+    border-radius: 15px ;
+    width: 150px;
+    margin: 20px;
+    height: 100px;
+  }
+
+  #humidity img {
+    width: 30px;
+    margin: 10px;
+    height: 30px;   
+  }
+
+  #humidity h1 {
+    text-align: center;
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 50px;
+  }
+
+  #humidity:hover{
+    border: 2px solid white;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    width: 160px;
+    height: 110px;
+    }
+
+  #info-wind {
+    display: inline-block;
+    width: 150px;
+  }
+
+  
+  #wind   {
+    display: inline-flex;
+    font-size: 20px;
+    border: 1px solid;
+    border-radius: 15px;
+    width: 150px;
+    margin: 20px;
+    height: 100px;
+  }
+
+  #wind h6 {
+    margin-left: 10px;
+  }
+
+  #wind img {
+    width: 20px;
+    margin: 10px;
+    height: 30px; 
+  }
+
+  #wind h1 {
+    text-align: center;
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 20px;    
+    font-size: 25px; 
+  }
+
+  
+  #wind:hover{
+    border: 2px solid white;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    width: 160px;
+    height: 110px;
+    }
+
+   
+  #visibility   {
+    display: inline-flex;
+    font-size: 20px;
+    border: 1px solid;
+    border-radius: 15px;
+    width: 150px;
+    margin: 20px;
+    height: 100px;
+  }
+
+  #visibility img {
+    width: 20px;
+    margin: 10px;
+    height: 30px; 
+  }
+
+  #visibility h1 {
+    text-align: center;
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 50px;
+  }
+
+  
+  #visibility:hover{
+    border: 2px solid white;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    width: 160px;
+    height: 110px;
+    }
+
+ 
+    #text {
+      border: 1px solid;
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    #forecast {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    #forecastify {
+      width: 58.5%;
+      border: 1px solid;
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    #scrool-bar {
+      border: 1px solid;
+      overflow-y: hidden; /* Mengaktifkan scroll vertikal */
+      overflow-x: scroll; /* Menyembunyikan scroll horizontal jika tidak diperlukan */
+      border: 1px solid #ccc; /* Opsional: menambahkan border untuk memperjelas area scroll */
+      padding: 10px; /* Opsional: menambahkan padding untuk tampilan yang lebih baik */
+      white-space: nowrap;
+    }
+
+        /* Custom Scrollbar */
+        #scrool-bar::-webkit-scrollbar {
+          height: 10px;
+      }
+      #scrool-bar::-webkit-scrollbar-track {
+          background: #f1f1f1; 
+          border-radius: 10px;
+      }
+      #scrool-bar::-webkit-scrollbar-thumb {
+          background: #888888; /* Warna thumb scroll bar */
+          border-radius: 10px; /* Membuat sudut thumb scroll bar menjadi bundar */
+      }
+      #scrool-bar::-webkit-scrollbar-thumb:hover {
+          background: #555; 
+      }
+
+
+    #forecast-hour {
+      border: 1px solid;
+      display: inline-block;
+      font-size: 20px;
+      border: 1px solid;
+      border-radius: 15px;
+      width: 150px;
+      margin: 20px;
+      justify-content: center;
+      text-align: center;
+      height: 125px;
+    }
+
+    #forecast-hour img {
+      width: 50px;
+      height: 40px; 
+    }
+
+    #forecast-hour small {
+      font-size: 11px;
+    }
+    #map { 
+      display: inline-block;
+      height: 300px; 
+      width: 300px;
+      border-radius: 10px;
+    }
+    
+    #map-cover {
+      padding: 10px;
+      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+      border: 1px solid rgb(255, 255, 255);
+      backdrop-filter: blur( 10px );
+      -webkit-backdrop-filter: blur( 10px );
+      border-radius: 10px;
+      height: 310px; 
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s;
+      margin-right: 20px;
+      margin-left: 40px;
+    } 
+    
+    #map-cover:hover{
+      border: 1px solid white;
+      box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+      backdrop-filter: blur( 7px );
+      -webkit-backdrop-filter: blur( 7px ); 
+    }
+
+
+  #card::before {
+    content: "";
+    width: 104%;
+    height: 102%;
+    border-radius: 8px;
+    background-image: linear-gradient(
+      var(--rotate),
+      #16738d,
+      #1b1e27 43%,
+      #5f4783
+    );
+    position: absolute;
+    z-index: -1;
+    top: -1%;
+    left: -2%;
+    animation: spin 2.5s linear infinite;
+  }
+
+
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    background-color: #16738d ;
+    height: 70px;
+  }
+
+  footer p {
+    color: #5f4783;
+    
+  }
+
+  @property --rotate {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
+  }
+  
+  @keyframes spin {
+    0% {
+      --rotate: 0deg;
+    }
+    100% {
+      --rotate: 360deg;
+    }
+  }
+  
+
+  
+
+  

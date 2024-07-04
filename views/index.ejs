@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Forecast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Titan+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+ 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""/>\
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+</head>
+
+<body>
+
+  <% if (locals.weather) { %>
+    <!-- CURRENT TIME BASED ON USER'S LATITUDE AND LONGITUDE -->
+    <% if (locals.currentHour) { %>
+  
+      <div id="time">
+        <% const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %>
+        <p><%=  currentHour.dayOfWeek %>, <%= currentHour.day %>  <%=  months[(currentHour.month)-1]%> </p>
+        <p><%= currentHour.time %></p>
+       </div> 
+    <% } %>  
+
+
+      <div id="card">
+        <div id="card-info">
+          <div id="info-now">
+            <div id="now">
+              <h3><%= weather.name %>, <%= weather.sys.country %></h3>
+              <h1><%=  Math.floor(weather.main.temp) %>&deg;C</h1>
+              <% if (weather.weather[0].main === "Clouds") { %>
+                <img src="images/cloud.png" alt="Sky Image">
+              <% } else if (weather.weather[0].main === "Thunderstorm") { %>
+                <img src="images/lightning.png" alt="Sky Image">
+              <% } else if (weather.weather[0].main === "Clear") { %>
+                <img src="images/clear-sky.png" alt="Sky Image">
+              <% } else if (weather.weather[0].main === "Snow") { %>
+                <img src="images/snow.png" alt="Sky Image">
+              <% } else if (weather.weather[0].main === "Drizzle") { %>
+                <img src="images/drizzle.png" alt="Sky Image">
+             <% } else { %>
+                <img src="images/rain.png" alt="Sky Image">
+             <% } %> 
+              <p><%= weather.weather[0].description %></p>
+            </div>
+          </div>
+          <div id="info-humidity">
+            <div id="humidity">
+              <img src="images/humidity.png" alt="Sky Image">
+              <h6>Humidity</h6>
+              <h1><%= weather.main.humidity %>%</h1>  
+            </div>
+            <div id="feel-like">
+              <img src="images/medical.png" alt="Sky Image">
+              <h6>Feels Like</h6>
+              <h1><%=  Math.floor(weather.main.feels_like) %>&deg;C</h1>  
+            </div>
+          </div>
+          <div id="info-wind">
+            <div id="wind">
+              <img src="images/air.png" alt="Sky Image">
+              <h6>Wind</h6>
+              <h1><%= weather.wind.speed %>km/h</h1> 
+            </div>
+            <div id="visibility">
+              <img src="images/visibility.png" alt="Sky Image">
+              <h6>Visibility</h6>
+              <h1><%=  Math.round((weather.visibility)/1000) %>km</h1> 
+            </div>
+          </div>
+        </div>
+  
+        <div id="forecast">
+           <div id="forecastify">
+             <div id="text">
+               <h4>Forecast</h4>
+            </div>
+                <div id="scrool-bar">
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[0].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[0].weather[0].main === "Clouds") { %>
+                          <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[0].weather[0].main === "Thunderstorm") { %> 
+                          <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[0].weather[0].main === "Clear") { %> 
+                          <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[0].weather[0].main === "Snow") { %> 
+                          <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[0].weather[0].main === "Drizzle") { %> 
+                          <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                      <%} else { %>
+                          <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                      <% } %>
+                    <small><%= forecast.list[0].dt_txt %></small>
+                  </div>
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[1].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[1].weather[0].main === "Clouds") { %>
+                          <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[1].weather[0].main === "Thunderstorm") { %> 
+                          <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[1].weather[0].main === "Clear") { %> 
+                          <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[1].weather[0].main === "Snow") { %> 
+                          <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[1].weather[0].main === "Drizzle") { %> 
+                          <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                      <%} else { %>
+                          <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                      <% } %>
+                    <small><%= forecast.list[1].dt_txt %></small>
+                  </div>
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[2].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[2].weather[0].main === "Clouds") { %>
+                          <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[2].weather[0].main === "Thunderstorm") { %> 
+                          <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[2].weather[0].main === "Clear") { %> 
+                          <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[2].weather[0].main === "Snow") { %> 
+                          <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[2].weather[0].main === "Drizzle") { %> 
+                          <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                      <%} else { %>
+                          <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                      <% } %>
+                    <small><%= forecast.list[2].dt_txt %></small>
+                  </div>
+                  
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[3].main.temp) %>&deg;C</h3>
+                        <% if (forecast.list[3].weather[0].main === "Clouds") { %>
+                          <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[3].weather[0].main === "Thunderstorm") { %> 
+                          <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[3].weather[0].main === "Clear") { %> 
+                          <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[3].weather[0].main === "Snow") { %> 
+                          <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                      <%} else if (forecast.list[3].weather[0].main === "Drizzle") { %> 
+                          <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                      <%} else { %>
+                          <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                      <% } %>
+                    <small><%= forecast.list[3].dt_txt %></small>
+                  </div> 
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[4].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[4].weather[0].main === "Clouds") { %>
+                      <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[4].weather[0].main === "Thunderstorm") { %> 
+                      <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[4].weather[0].main === "Clear") { %> 
+                      <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[4].weather[0].main === "Snow") { %> 
+                      <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[4].weather[0].main === "Drizzle") { %> 
+                      <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                  <%} else { %>
+                      <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                  <% } %>
+                    <small><%= forecast.list[4].dt_txt %></small>
+                  </div> 
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[5].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[5].weather[0].main === "Clouds") { %>
+                      <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[5].weather[0].main === "Thunderstorm") { %> 
+                      <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[5].weather[0].main === "Clear") { %> 
+                      <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[5].weather[0].main === "Snow") { %> 
+                      <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[5].weather[0].main === "Drizzle") { %> 
+                      <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                  <%} else { %>
+                      <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                  <% } %>
+                    <small><%= forecast.list[5].dt_txt %></small>
+                  </div> 
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[6].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[6].weather[0].main === "Clouds") { %>
+                      <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[6].weather[0].main === "Thunderstorm") { %> 
+                      <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[6].weather[0].main === "Clear") { %> 
+                      <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[6].weather[0].main === "Snow") { %> 
+                      <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[6].weather[0].main === "Drizzle") { %> 
+                      <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                  <%} else { %>
+                      <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                  <% } %>
+                    <small><%= forecast.list[6].dt_txt %></small>
+                  </div> 
+                  <div id="forecast-hour">
+                    <h3><%= Math.floor(forecast.list[7].main.temp) %>&deg;C</h3>
+                    <% if (forecast.list[7].weather[0].main === "Clouds") { %>
+                      <h1><img src="images/cloud.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[7].weather[0].main === "Thunderstorm") { %> 
+                      <h1><img src="images/lightning.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[7].weather[0].main === "Clear") { %> 
+                      <h1><img src="images/clear-sky.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[7].weather[0].main === "Snow") { %> 
+                      <h1><img src="images/snow.png" alt="Sky Image"></h1>
+                  <%} else if (forecast.list[7].weather[0].main === "Drizzle") { %> 
+                      <h1><img src="images/drizzle.png" alt="Sky Image"></h1>
+                  <%} else { %>
+                      <h1><img src="images/rain.png" alt="Sky Image"></h1>
+                  <% } %>
+                    <small><%= forecast.list[7].dt_txt %></small>
+                  </div> 
+                     
+              </div>   
+              
+            </div>
+            
+            <% if(locals.map) { %>
+              <div id="map-cover"><div id="map"></div></div>
+              <script>
+                const map = L.map('map').setView([<%= map %>], 4);
+                const marker = L.marker([<%= map %>]).addTo(map);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  maxZoom: 20,
+                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+              </script>
+            <% } %>
+   
+
+           
+        </div>  
+        
+   
+  <% } else { %>
+    <div id ="card">
+      <h1 class="h1">Forecast</h1>
+    
+        <form id="home" action="/" method="post">
+          <input type="text" name="city" id="city" placeholder="Enter city name" required>
+          <button type="submit">Get Weather</button>
+        </form> 
+        <div id="buttons-wrapper">
+          <div id="buttons">
+              <button id="autoLocationBtn" onclick="getLocation()">Get Your Location</button>
+        </div>
+   </div>
+    <% } %> 
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+  function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+  }
+  
+  async function showPosition(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+  
+    try {
+        const cityName = await getCityName(lat, lng);
+        document.getElementById("city").value = cityName;
+        document.getElementById("home").submit();
+    } catch (error) {
+        console.error("Error getting city name: ", error);
+    }
+  }
+  
+  async function getCityName(lat, lng) {
+    const apiKey = 'ddd9bc2633644c2192981134abc14f5b'; 
+    const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`);
+    const data = await response.json();
+    if (data.results.length > 0) {  
+        return data.results[0].components._normalized_city || "Lokasi tidak ditemukan";
+    } else {
+        throw new Error('Lokasi tidak ditemukan');
+    }
+  }
+  
+  function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+  }
+  </script>
+  
+</body>
+
+<footer>
+  <p>API by <span><a href="https://openweathermap.org/"><img src="/images/logo@2x.png" id="openweather-logo" height="30px"></a></span> </p>
+</footer>
+
+</html>
